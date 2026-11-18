@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AquaSave | Smart Water Conservation</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>💧 AquaSave</h1>
+        <p>Every Drop Counts. Save Water, Save Life.</p>
+    </header>
+
+    <main>
+
+        <section class="card">
+
+            <h2>Daily Water Consumption</h2>
+
+            <form action="/calculate" method="POST">
+
+                <label>Number of Family Members</label>
+                <input type="number" name="members"
+                       min="1" required>
+
+                <label>Bathing (Litres)</label>
+                <input type="number" name="bathing"
+                       min="0" step="any" required>
+
+                <label>Cooking (Litres)</label>
+                <input type="number" name="cooking"
+                       min="0" step="any" required>
+
+                <label>Washing (Litres)</label>
+                <input type="number" name="washing"
+                       min="0" step="any" required>
+
+                <label>Cleaning (Litres)</label>
+                <input type="number" name="cleaning"
+                       min="0" step="any" required>
+
+                <label>Gardening (Litres)</label>
+                <input type="number" name="gardening"
+                       min="0" step="any" required>
+
+                <label>Other (Litres)</label>
+                <input type="number" name="other"
+                       min="0" step="any" required>
+
+                <button type="submit">
+                    Calculate Consumption
+                </button>
+
+            </form>
+
+            {% if total is defined %}
+
+            <div class="result">
+
+                <h2>Your Results</h2>
+
+                <h3>Total: {{ "%.2f"|format(total) }} Litres</h3>
+
+                <p>
+                    Per Person:
+                    {{ "%.2f"|format(per_person) }} Litres
+                </p>
+
+            </div>
+
+            {% endif %}
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Made with 💧 for a sustainable future.</p>
+    </footer>
+
+</body>
+</html>
